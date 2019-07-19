@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Employee Form</title>
+</head>
+<body>
+<div class="container">
+
+    <h3>Update Employee</h3>
+
+    <form th:action="@{/employees/update}"
+          th:object="${employee}" method="post">
+
+        <input type="hidden" th:field="*{empId}">
+
+        <input type="text" th:field="*{name}"
+               class="form-control mb-4 col-4" placeholder="Name">
+
+        <input type="text" th:field="*{department}"
+               class="form-control mb-4 col-4" placeholder="Department">
+
+        <input type="number" min="0" th:field="*{salary}"
+               class="form-control mb-4 col-4" placeholder="Salary">
+
+        <input type="text" th:field="*{joinedOn}"
+               class="form-control mb-4 col-4 joined" placeholder="Joined On">
+
+        <button type="submit" class="btn btn-info col-2">Save changes</button>
+    </form>
+
+</div>
+</body>
+</html>
