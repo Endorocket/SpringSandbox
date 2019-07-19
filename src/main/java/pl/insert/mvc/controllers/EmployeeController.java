@@ -1,4 +1,4 @@
-package pl.insert.controllers;
+package pl.insert.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class EmployeeController {
     @GetMapping
     public String getEmployees(Model model) {
         List<Employee> employees = employeeService.getEmployeeList();
-        model.addAttribute("employees",employees);
+        model.addAttribute("employees", employees);
 
-        return "employees/list-employees.html";
+        return "employees/list-employees";
     }
 }

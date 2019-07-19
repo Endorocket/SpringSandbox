@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import pl.insert.config.AppConfig;
+import pl.insert.config.JpaConfig;
 import pl.insert.data.Employee;
 
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {AppConfig.class})
+@ContextConfiguration(classes = {JpaConfig.class})
 public class EmployeeServiceImplTest {
 
     @Autowired
