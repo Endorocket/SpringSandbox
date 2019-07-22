@@ -17,6 +17,10 @@
     <p th:text="${#dates.format(standardDate, 'yyyy-MM-dd hh:mm:ss')}"></p>
     <br>
     <a th:href="@{/employees}">Employees</a>
+    <br>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
 </div>
 
 </body>
