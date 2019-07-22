@@ -59,8 +59,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public String addEmployee(@ModelAttribute("employee") Employee employee) {
-        log.info("inside updateEmployee");
+    public String addEmployee(@ModelAttribute("employee") Employee employee,BindingResult result,Model model) {
+        log.info("inside addEmployee");
+
+        validator.validate(employee, result);
+        if (result.hasErrors()) {
+            model.addAttribute("employee", employee);
+            return "employees/add-form";
+        }
+
         employeeService.insertEmployee(employee);
 
         return "redirect:/employees";
@@ -75,14 +82,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute("employee") Employee employee/*, BindingResult result*/) {
+    public String updateEmployee(@ModelAttribute("employee") Employee employee, BindingResult result) {
         log.info("inside updateEmployee");
 
-//        validator.validate(employee,result);
-//        if (result.hasErrors()) {
-//            return "redirect:/employees";
-//        }
-        
+        validator.validate(employee, result);
+        if (result.hasErrors()) {
+            return "employees/error";
+        }
+
         employeeService.updateEmployee(employee);
 
         return "redirect:/employees";

@@ -9,15 +9,11 @@
     <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+
 <div class="container">
-    <h1>Spring MVC 5 - Thymeleaf Hello World Example</h1>
-    <p th:text="${message}">Your message goes here...</p>
-    <br>
-    <h1>Current time</h1>
-    <p th:text="${#dates.format(standardDate, 'yyyy-MM-dd hh:mm:ss')}"></p>
+    <h3>Oh no! Some error is here</h3>
     <br>
     <a th:href="@{/employees}">Employees</a>
 </div>
-
 </body>
 </html>
