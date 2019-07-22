@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.jdbcAuthentication().rolePrefix("ROLE_").dataSource(dataSource());
+        auth.jdbcAuthentication().dataSource(dataSource());
     }
 
     @Override

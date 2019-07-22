@@ -22,6 +22,7 @@
             <property name="javax.persistence.jdbc.password" value="root"/>
 
             <property name="hibernate.connection.isolation" value="2"/>
+            <property name="hibernate.connection.isolation" value="4"/>
 
         </properties>
 
