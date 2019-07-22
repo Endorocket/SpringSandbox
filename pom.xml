@@ -13,7 +13,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
-        <org.springframework.version>5.1.8.RELEASE</org.springframework.version>
+        <spring.version>5.1.8.RELEASE</spring.version>
+        <spring-security.version>5.1.5.RELEASE</spring-security.version>
     </properties>
 
     <dependencies>
@@ -21,21 +22,35 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
 
         <!-- Spring Data core -->
         <dependency>
@@ -72,6 +87,13 @@
             <version>5.4.0.Final</version>
         </dependency>
 
+        <!--        <dependency>-->
+        <!--            <groupId>org.hibernate.validator</groupId>-->
+        <!--            <artifactId>hibernate-validator</artifactId>-->
+        <!--            <version>6.0.17.Final</version>-->
+        <!--        </dependency>-->
+
+
         <!-- MySQL database driver -->
         <dependency>
             <groupId>mysql</groupId>
@@ -99,11 +121,11 @@
 
 
         <!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>5.5.0</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!--            <groupId>org.junit.jupiter</groupId>-->
+        <!--            <artifactId>junit-jupiter-api</artifactId>-->
+        <!--            <version>5.5.0</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
@@ -136,6 +158,13 @@
             <artifactId>momentjs</artifactId>
             <version>2.24.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrapvalidator</artifactId>
+            <version>0.5.3</version>
+        </dependency>
+
 
     </dependencies>
 
