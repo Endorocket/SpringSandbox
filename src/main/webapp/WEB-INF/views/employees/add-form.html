@@ -8,10 +8,6 @@
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Validator -->
-    <link href="/webjars/bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
-    <script src="/webjars/bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
-
     <title>Employee Form</title>
 </head>
 <body>
@@ -19,7 +15,7 @@
 
     <h3>Add Employee</h3>
 
-    <form th:action="@{/employees/add}"
+    <form action="#" th:action="@{/employees/add}"
           th:object="${employee}" method="post">
 
         <input type="text" th:field="*{name}"
@@ -28,13 +24,24 @@
         <input type="text" th:field="*{department}"
                class="form-control mb-4 col-4" placeholder="Department">
 
-        <input type="number" min="0" th:field="*{salary}"
+        <input type="number" th:field="*{salary}"
                class="form-control mb-4 col-4" placeholder="Salary">
 
         <input type="text" th:field="*{joinedOn}"
                class="form-control mb-4 col-4" placeholder="Joined On">
 
-        <div th:if="${#fields.hasErrors('joinedOn')}" class="alert alert-danger col-4">Incorrect date format</div>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+             class="alert alert-danger col-4">Name Error
+        </div>
+        <div th:if="${#fields.hasErrors('department')}" th:errors="*{department}"
+             class="alert alert-danger col-4">Department Error
+        </div>
+        <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"
+             class="alert alert-danger col-4">Salary Error
+        </div>
+        <div th:if="${#fields.hasErrors('joinedOn')}" th:errors="*{joinedOn}"
+             class="alert alert-danger col-4">JoinedOn Error
+        </div>
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>

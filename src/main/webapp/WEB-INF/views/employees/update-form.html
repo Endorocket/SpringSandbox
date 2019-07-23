@@ -25,11 +25,24 @@
         <input type="text" th:field="*{department}"
                class="form-control mb-4 col-4" placeholder="Department">
 
-        <input type="number" min="0" th:field="*{salary}"
+        <input type="number" th:field="*{salary}"
                class="form-control mb-4 col-4" placeholder="Salary">
 
         <input type="text" th:field="*{joinedOn}"
                class="form-control mb-4 col-4 joined" placeholder="Joined On">
+
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+             class="alert alert-danger col-4">Name Error
+        </div>
+        <div th:if="${#fields.hasErrors('department')}" th:errors="*{department}"
+             class="alert alert-danger col-4">Department Error
+        </div>
+        <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"
+             class="alert alert-danger col-4">Salary Error
+        </div>
+        <div th:if="${#fields.hasErrors('joinedOn')}" th:errors="*{joinedOn}"
+             class="alert alert-danger col-4">JoinedOn Error
+        </div>
 
         <button type="submit" class="btn btn-info col-2">Save changes</button>
     </form>

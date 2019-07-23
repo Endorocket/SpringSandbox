@@ -3,19 +3,14 @@ package pl.insert.mvc.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import pl.insert.data.Employee;
 import pl.insert.services.EmployeeService;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,19 +20,12 @@ public class EmployeeController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass().getName());
     private final Validator validator;
-
     private final EmployeeService employeeService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService, Validator validator) {
         this.employeeService = employeeService;
         this.validator = validator;
-    }
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"), true));
     }
 
     @GetMapping
@@ -59,12 +47,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public String addEmployee(@ModelAttribute("employee") Employee employee,BindingResult result,Model model) {
+    public String addEmployee(@ModelAttribute("employee") Employee employee, BindingResult result) {
         log.info("inside addEmployee");
 
         validator.validate(employee, result);
         if (result.hasErrors()) {
-            model.addAttribute("employee", employee);
             return "employees/add-form";
         }
 
@@ -87,7 +74,7 @@ public class EmployeeController {
 
         validator.validate(employee, result);
         if (result.hasErrors()) {
-            return "employees/error";
+            return "employees/update-form";
         }
 
         employeeService.updateEmployee(employee);

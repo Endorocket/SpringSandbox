@@ -1,6 +1,10 @@
 package pl.insert.data;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,12 +17,15 @@ public class Employee implements Serializable {
     @Column(name = "EMP_ID")
     private Long empId;
 
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
     private String department;
 
+    @Min(value = 0, message = "Salary should not be less than 0")
     private Long salary;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Column(name = "JOINED_ON")
     private Date joinedOn;
 

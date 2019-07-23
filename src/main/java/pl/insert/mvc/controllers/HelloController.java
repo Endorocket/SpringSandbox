@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping
+@RequestMapping("/home")
 public class HelloController {
 
     @GetMapping
