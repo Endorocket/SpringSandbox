@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping
 public class HelloController {
 
     @GetMapping
+    public String redirectPage() {
+        return "redirect:home";
+    }
+
+    @GetMapping("/home")
     public String index(Model model) {
         model.addAttribute("message", "Hello Spring MVC 5!");
         model.addAttribute("standardDate", new Date());
