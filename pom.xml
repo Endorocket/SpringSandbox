@@ -18,19 +18,21 @@
     </properties>
 
     <dependencies>
-        <!-- Add Spring MVC and REST support -->
+        <!-- Spring MVC and REST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring Transactions -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring test support -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -66,11 +68,11 @@
             <version>2.5.1.RELEASE</version>
         </dependency>
 
-        <!-- Add Jackson for JSON converters -->
+        <!-- Jackson for JSON converters -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.5</version>
+            <version>2.10.0.pr1</version>
         </dependency>
 
         <!-- Add Servlet support for
@@ -81,12 +83,6 @@
             <version>3.1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-
         <!-- Hibernate core -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -94,6 +90,7 @@
             <version>5.4.0.Final</version>
         </dependency>
 
+        <!-- Hibernate Validator -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -108,24 +105,21 @@
             <version>8.0.16</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
-        </dependency>
-
+        <!-- Basic Data Source -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
 
+        <!-- Logger -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.26</version>
         </dependency>
 
+        <!-- Thymeleaf -->
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
@@ -144,7 +138,7 @@
             <version>3.0.4.RELEASE</version>
         </dependency>
 
-
+        <!-- JUnit 5 -->
         <!--        <dependency>-->
         <!--            <groupId>org.junit.jupiter</groupId>-->
         <!--            <artifactId>junit-jupiter-api</artifactId>-->
@@ -152,6 +146,7 @@
         <!--            <scope>test</scope>-->
         <!--        </dependency>-->
 
+        <!-- JUnit 4 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
