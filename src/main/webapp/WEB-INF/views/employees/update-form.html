@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-    <title>Employee Form</title>
-</head>
+<head th:replace="fragments/head :: head ('Update Employee')"></head>
 <body>
 <div class="container">
 
@@ -48,5 +40,7 @@
     </form>
 
 </div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
 </body>
 </html>

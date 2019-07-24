@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="fragments/head :: head ('Activation')"></head>
 <body>
-
 <div class="container">
     <h2>Click to activate account</h2>
 
@@ -16,6 +11,6 @@
     </form>
 
 </div>
-
+<script th:replace="fragments/scripts :: scripts"></script>
 </body>
 </html>
