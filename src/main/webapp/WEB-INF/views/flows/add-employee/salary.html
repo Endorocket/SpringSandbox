@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head ('Add Employee 2')"></head>
+<body>
+
+<div class="wrapper">
+
+    <div class="navbar navbar-dark bg-dark navbar-expand-md" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+
+            <h3 style="margin: 50px">Add Employee</h3>
+
+            <form th:action="${flowExecutionUrl}" method="post"
+                  th:object="${employee}">
+
+                <input type="text" th:field="*{salary}"
+                       class="form-control mb-4 col-4" placeholder="Salary">
+
+                <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"
+                     class="alert alert-danger col-4">Salary Error
+                </div>
+
+                <a style="margin-right:20px" class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_previous'}">Previous</a>
+                <button type="submit" class="btn btn-info col-2" name="_eventId_joinedOn">Next</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+
+    <!--    <var name="employee" class="pl.insert.data.Employee"/>-->
+
+    <on-start>
+        <evaluate expression="addEmployeeHandler.init()" result="flowScope.employee"/>
+    </on-start>
+
+    <!-- start state -->
+    <view-state id="personal" view="flows/add-employee/personal" model="flowScope.employee">
+        <transition on="salary" to="salary"/>
+    </view-state>
+
+    <view-state id="salary" view="flows/add-employee/salary" model="flowScope.employee">
+        <transition on="joinedOn" to="joinedOn"/>
+        <transition on="previous" to="personal"/>
+    </view-state>
+
+    <view-state id="joinedOn" view="flows/add-employee/joined-on" model="flowScope.employee">
+        <transition on="confirm" to="confirm"/>
+        <transition on="previous" to="salary"/>
+    </view-state>
+
+    <view-state id="confirm" view="flows/add-employee/confirm" model="flowScope.employee">
+        <transition on="personal" to="personal"/>
+        <transition on="salary" to="salary"/>
+        <transition on="joinedOn" to="joinedOn"/>
+
+        <transition on="submit" to="submit"/>
+    </view-state>
+
+    <action-state id="submit">
+        <evaluate expression="addEmployeeHandler.save(flowScope.employee)"/>
+
+        <transition on="success" to="success"/>
+    </action-state>
+
+
+    <end-state id="success" view="flows/add-employee/success"/>
+    <end-state id="home" view="externalRedirect:contextRelative:/"/>
+
+    <!-- global transition -->
+    <global-transitions>
+        <transition on="home" to="home" validate="false"/>
+    </global-transitions>
+</flow>

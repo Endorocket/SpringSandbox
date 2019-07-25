@@ -3,6 +3,7 @@ package pl.insert.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.Validator;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
@@ -18,16 +19,19 @@ import java.util.Collections;
 public class WebFlowConfig extends AbstractFlowConfiguration {
 
     private final ViewResolver viewResolver;
+    private final Validator validator;
 
     @Autowired
-    public WebFlowConfig(ViewResolver viewResolver) {
+    public WebFlowConfig(ViewResolver viewResolver, Validator validator) {
         this.viewResolver = viewResolver;
+        this.validator = validator;
     }
 
     @Bean
     public FlowDefinitionRegistry flowRegistry() {
         return getFlowDefinitionRegistryBuilder(flowBuilderServices())
-                .addFlowLocation("/WEB-INF/flows/activation-flow.xml", "activationFlow")
+                .setBasePath("/WEB-INF/flows")
+                .addFlowLocationPattern("/**/*-flow.xml") // ** is an id, for example add-employee, test
                 .build();
     }
 
@@ -40,7 +44,9 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     public FlowBuilderServices flowBuilderServices() {
         return getFlowBuilderServicesBuilder()
                 .setViewFactoryCreator(mvcViewFactoryCreator())
-                .setDevelopmentMode(true).build();
+                .setDevelopmentMode(true)
+                .setValidator(validator)
+                .build();
     }
 
     @Bean

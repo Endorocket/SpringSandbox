@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head ('Add Employee 3')"></head>
+<body>
+
+<div class="wrapper">
+
+    <div class="navbar navbar-dark bg-dark navbar-expand-md" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+
+            <h3 style="margin: 50px">Employee Details</h3>
+
+            <h6 th:text="Name+': '+ ${employee.name}"></h6>
+            <h6 th:text="Department+': '+ ${employee.department}"></h6>
+
+            <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_personal'}">Personal</a>
+
+            <h6 th:text="Salary+': '+ ${employee.salary}"></h6>
+
+            <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_salary'}">Salary</a>
+
+            <h6 th:text="'Joined On:'+ ${employee.joinedOn}"></h6>
+
+            <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_joinedOn'}">Joined On</a>
+
+
+            <div style="margin: 50px">
+                <a class="btn btn-success" th:href="@{${flowExecutionUrl} + '&_eventId_submit'}">Confirm</a>
+            </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
+</body>
+</html>

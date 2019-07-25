@@ -20,6 +20,7 @@ public class Employee implements Serializable {
     @NotBlank(message = "Name cannot be blank")
     private String name;
 
+    @NotBlank(message = "Department cannot be blank")
     private String department;
 
     @Min(value = 0, message = "Salary should not be less than 0")
