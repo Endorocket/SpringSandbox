@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 import pl.insert.data.Employee;
 import pl.insert.services.EmployeeService;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -19,13 +19,11 @@ import java.util.List;
 public class EmployeeController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass().getName());
-    private final Validator validator;
     private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, Validator validator) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.validator = validator;
     }
 
     @GetMapping
@@ -47,10 +45,9 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public String addEmployee(@ModelAttribute("employee") Employee employee, BindingResult result) {
+    public String addEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult result) {
         log.info("inside addEmployee");
 
-        validator.validate(employee, result);
         if (result.hasErrors()) {
             return "employees/add-form";
         }
@@ -69,10 +66,9 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute("employee") Employee employee, BindingResult result) {
+    public String updateEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult result) {
         log.info("inside updateEmployee");
 
-        validator.validate(employee, result);
         if (result.hasErrors()) {
             return "employees/update-form";
         }
