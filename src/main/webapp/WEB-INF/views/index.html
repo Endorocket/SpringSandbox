@@ -6,7 +6,7 @@
     <h1>Spring MVC 5 - Thymeleaf Hello World Example</h1>
     <p th:text="${message}">Your message goes here...</p>
     <br>
-    <h1>Current time</h1>
+    <h3>Current time</h3>
     <p th:text="${#dates.format(standardDate, 'yyyy-MM-dd hh:mm:ss')}"></p>
     <br>
     <a th:href="@{/employees}">Employees</a>
@@ -16,7 +16,11 @@
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
     <br>
-    <a th:href="@{/test}">Activation Flow</a>
+    <h3>Flows</h3>
+    <br>
+    <a th:href="@{/test}">Test Flow</a>
+    <br>
+    <a th:href="@{/add-employee}">Add Employee Flow</a>
 </div>
 <script th:replace="fragments/scripts :: scripts"></script>
 </body>

@@ -14,7 +14,7 @@ import javax.persistence.ValidationMode;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"pl.insert.dao", "pl.insert.services"})
+@ComponentScan({"pl.insert.dao", "pl.insert.services","pl.insert.config"})
 public class JpaConfig {
 
     @Bean

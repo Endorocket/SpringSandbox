@@ -9,6 +9,8 @@
 
 
         <class>pl.insert.data.Employee</class>
+        <class>pl.insert.data.User</class>
+        <class>pl.insert.data.Authority</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
