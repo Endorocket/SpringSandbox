@@ -3,8 +3,6 @@ package pl.insert.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.Validator;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
@@ -18,13 +16,11 @@ import java.util.Collections;
 @Configuration
 public class WebFlowConfig extends AbstractFlowConfiguration {
 
-    private final ViewResolver viewResolver;
-    private final Validator validator;
+    private final WebMvcConfig webMvcConfig;
 
     @Autowired
-    public WebFlowConfig(ViewResolver viewResolver, Validator validator) {
-        this.viewResolver = viewResolver;
-        this.validator = validator;
+    public WebFlowConfig(WebMvcConfig webMvcConfig) {
+        this.webMvcConfig = webMvcConfig;
     }
 
     @Bean
@@ -45,14 +41,14 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
         return getFlowBuilderServicesBuilder()
                 .setViewFactoryCreator(mvcViewFactoryCreator())
                 .setDevelopmentMode(true)
-                .setValidator(validator)
+                .setValidator(webMvcConfig.validator())
                 .build();
     }
 
     @Bean
     public MvcViewFactoryCreator mvcViewFactoryCreator() {
         MvcViewFactoryCreator factoryCreator = new MvcViewFactoryCreator();
-        factoryCreator.setViewResolvers(Collections.singletonList(viewResolver));
+        factoryCreator.setViewResolvers(Collections.singletonList(webMvcConfig.viewResolver()));
         factoryCreator.setUseSpringBeanBinding(true);
         return factoryCreator;
     }

@@ -21,12 +21,13 @@
                 <input type="text" th:field="*{joinedOn}"
                        class="form-control mb-4 col-4" placeholder="Joined On">
 
-                <div th:if="${#fields.hasErrors('joinedOn')}" th:errors="*{joinedOn}"
-                     class="alert alert-danger col-4">JoinedOn Error
-                </div>
+                <p class="alert alert-danger col-3"
+                   th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('joinedOn')}"
+                   th:text="${err.text}">Input is invalid</p>
 
                 <a style="margin-right:20px" class="btn btn-secondary"
                    th:href="@{${flowExecutionUrl} + '&_eventId_previous'}">Previous</a>
+
                 <button type="submit" class="btn btn-info col-2" name="_eventId_confirm">Next</button>
             </form>
         </div>

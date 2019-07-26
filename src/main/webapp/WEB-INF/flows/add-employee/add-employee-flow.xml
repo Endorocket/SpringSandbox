@@ -16,13 +16,19 @@
     </view-state>
 
     <view-state id="salary" view="flows/add-employee/salary" model="flowScope.employee">
-        <transition on="joinedOn" to="joinedOn"/>
-        <transition on="previous" to="personal"/>
+        <transition on="joinedOn" to="enterJoinedOn"/>
+        <transition on="previous" to="personal" validate="false"/>
     </view-state>
+
+    <action-state id="enterJoinedOn">
+        <evaluate expression="addEmployeeHandler.enterJoinedOn(flowScope.employee)"/>
+
+        <transition on="confirm" to="joinedOn"/>
+    </action-state>
 
     <view-state id="joinedOn" view="flows/add-employee/joined-on" model="flowScope.employee">
         <transition on="confirm" to="confirm"/>
-        <transition on="previous" to="salary"/>
+        <transition on="previous" to="salary" validate="false"/>
     </view-state>
 
     <view-state id="confirm" view="flows/add-employee/confirm" model="flowScope.employee">

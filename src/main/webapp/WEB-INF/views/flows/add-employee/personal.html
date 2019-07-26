@@ -25,12 +25,13 @@
                 <input type="text" th:field="*{department}"
                        class="form-control mb-4 col-4" placeholder="Department">
 
-                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                     class="alert alert-danger col-4">Name Error
-                </div>
-                <div th:if="${#fields.hasErrors('department')}" th:errors="*{department}"
-                     class="form-text">Department Error
-                </div>
+                <p class="alert alert-danger col-3"
+                   th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('name')}"
+                   th:text="${err.text}">Input is invalid</p>
+
+                <p class="alert alert-danger col-3"
+                   th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('department')}"
+                   th:text="${err.text}">Input is invalid</p>
 
                 <button type="submit" class="btn btn-info col-2" name="_eventId_salary">Next</button>
             </form>

@@ -22,11 +22,13 @@
                 <input type="text" th:field="*{salary}"
                        class="form-control mb-4 col-4" placeholder="Salary">
 
-                <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"
-                     class="alert alert-danger col-4">Salary Error
-                </div>
+                <p class="alert alert-danger col-3"
+                   th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('salary')}"
+                   th:text="${err.text}">Input is invalid</p>
 
-                <a style="margin-right:20px" class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_previous'}">Previous</a>
+                <a style="margin-right:20px" class="btn btn-secondary"
+                   th:href="@{${flowExecutionUrl} + '&_eventId_previous'}">Previous</a>
+
                 <button type="submit" class="btn btn-info col-2" name="_eventId_joinedOn">Next</button>
             </form>
         </div>
