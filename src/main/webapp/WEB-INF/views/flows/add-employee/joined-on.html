@@ -21,7 +21,7 @@
                 <input type="text" th:field="*{joinedOn}"
                        class="form-control mb-4 col-4" placeholder="Joined On">
 
-                <p class="alert alert-danger col-3"
+                <p class="alert alert-danger col-4"
                    th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('joinedOn')}"
                    th:text="${err.text}">Input is invalid</p>
 

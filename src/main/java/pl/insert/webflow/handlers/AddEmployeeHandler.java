@@ -24,8 +24,8 @@ public class AddEmployeeHandler {
     public String enterJoinedOn(Employee model) {
         String transitionValue = "confirm";
 
-        Date date = new Date();
-        model.setJoinedOn(date);
+//        Date date = new Date();
+//        model.setJoinedOn(date);
 
         return transitionValue;
     }
