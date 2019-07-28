@@ -12,6 +12,7 @@ public class Authority implements Serializable {
     @JoinColumn(name = "username", nullable = false)
     private User user;
 
+    @Id
     @Column(name = "authority")
     private String authority;
 
@@ -37,13 +38,5 @@ public class Authority implements Serializable {
 
     public void setAuthority(String authority) {
         this.authority = authority;
-    }
-
-    @Override
-    public String toString() {
-        return "Authority{" +
-                "user=" + user +
-                ", authority='" + authority + '\'' +
-                '}';
     }
 }

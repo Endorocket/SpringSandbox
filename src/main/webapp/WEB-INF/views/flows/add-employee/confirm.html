@@ -14,27 +14,30 @@
     <div class="content">
         <div class="container">
 
-            <h3 style="margin: 50px">Employee Details</h3>
+            <h3 style="margin: 40px">Employee Details</h3>
 
-            <h6 th:text="Name+': '+ ${employee.name}"></h6>
-            <h6 th:text="Department+': '+ ${employee.department}"></h6>
+            <div class="form-group">
+                <h6 th:text="Name+': '+ ${employee.name}"></h6>
+                <h6 th:text="Department+': '+ ${employee.department}"></h6>
 
-            <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_personal'}">Personal</a>
-
-            <h6 th:text="Salary+': '+ ${employee.salary}"></h6>
-
-            <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_salary'}">Salary</a>
-
-            <h6 th:text="'Joined On:'+ ${employee.joinedOn}"></h6>
-
-            <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_joinedOn'}">Joined On</a>
-
-
-            <div style="margin: 50px">
-                <a class="btn btn-success" th:href="@{${flowExecutionUrl} + '&_eventId_submit'}">Confirm</a>
+                <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_personal'}">Personal</a>
             </div>
 
-            </form>
+            <div class="form-group">
+                <h6 th:text="Salary+': '+ ${employee.salary}"></h6>
+
+                <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_salary'}">Salary</a>
+            </div>
+
+            <div class="form-group">
+                <h6 th:text="'Joined On:'+ ${employee.joinedOn}"></h6>
+
+                <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_joinedOn'}">Joined On</a>
+            </div>
+
+            <div style="margin: 40px">
+                <a class="btn btn-success" th:href="@{${flowExecutionUrl} + '&_eventId_submit'}">Confirm</a>
+            </div>
         </div>
     </div>
 </div>

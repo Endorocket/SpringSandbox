@@ -1,35 +1,36 @@
 package pl.insert.config;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.sql.DataSource;
+import pl.insert.security.CustomAuthenticationSuccessHandler;
+import pl.insert.services.UserService;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan({"pl.insert.config", "pl.insert.security"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    @Qualifier("userService")
-//    private UserService userService;
-////    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private final ApplicationContext context;
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
 
-//    @Autowired
-//    public SecurityConfig(UserDetailsService userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-////        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-//    }
+    @Autowired
+    public SecurityConfig(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler, ApplicationContext context) {
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+        this.context = context;
+    }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-        auth.jdbcAuthentication().dataSource(dataSource());
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
@@ -40,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/employees").hasRole("USER")
                 .antMatchers("/employees/*").hasRole("ADMIN")
                 .and()
-                .formLogin().loginPage("/login-page")
+                .formLogin().loginPage("/login-page").successHandler(customAuthenticationSuccessHandler)
                 .loginProcessingUrl("/authenticateTheUser")
                 .permitAll()
                 .and()
@@ -50,25 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/example-schema?serverTimezone=UTC");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        return dataSource;
-    }
-
-    @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-//        auth.setUserDetailsService(userService);
-//        auth.setPasswordEncoder(passwordEncoder());
-//        return auth;
-//    }
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(context.getBean(UserService.class, "userService"));
+        auth.setPasswordEncoder(passwordEncoder());
+        return auth;
+    }
 }

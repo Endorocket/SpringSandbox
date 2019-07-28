@@ -2,7 +2,10 @@ package pl.insert.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
@@ -14,13 +17,14 @@ import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 import java.util.Collections;
 
 @Configuration
+@ComponentScan({"pl.insert.webflow"})
 public class WebFlowConfig extends AbstractFlowConfiguration {
 
-    private final WebMvcConfig webMvcConfig;
+    private final ViewResolver viewResolver;
 
     @Autowired
-    public WebFlowConfig(WebMvcConfig webMvcConfig) {
-        this.webMvcConfig = webMvcConfig;
+    public WebFlowConfig(ViewResolver viewResolver) {
+        this.viewResolver = viewResolver;
     }
 
     @Bean
@@ -41,14 +45,14 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
         return getFlowBuilderServicesBuilder()
                 .setViewFactoryCreator(mvcViewFactoryCreator())
                 .setDevelopmentMode(true)
-                .setValidator(webMvcConfig.validator())
+                .setValidator(validator())
                 .build();
     }
 
     @Bean
     public MvcViewFactoryCreator mvcViewFactoryCreator() {
         MvcViewFactoryCreator factoryCreator = new MvcViewFactoryCreator();
-        factoryCreator.setViewResolvers(Collections.singletonList(webMvcConfig.viewResolver()));
+        factoryCreator.setViewResolvers(Collections.singletonList(viewResolver));
         factoryCreator.setUseSpringBeanBinding(true);
         return factoryCreator;
     }
@@ -67,5 +71,10 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
         handlerAdapter.setFlowExecutor(flowExecutor());
         handlerAdapter.setSaveOutputToFlashScopeOnRedirect(true);
         return handlerAdapter;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
     }
 }

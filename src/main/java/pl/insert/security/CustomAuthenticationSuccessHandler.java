@@ -1,6 +1,9 @@
-package pl.insert.config;
+package pl.insert.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -16,32 +19,34 @@ import java.io.IOException;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final UserService userService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
+    private final ApplicationContext context;
 
     @Autowired
-    public CustomAuthenticationSuccessHandler(UserService userService) {
-        this.userService = userService;
+    public CustomAuthenticationSuccessHandler(ApplicationContext context) {
+        this.context = context;
     }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
 
-        System.out.println("\n\nIn customAuthenticationSuccessHandler\n\n");
+        logger.info("\n\nIn customAuthenticationSuccessHandler\n\n");
 
-        String userName = authentication.getName();
+        String username = authentication.getName();
 
-        System.out.println("userName=" + userName);
+        logger.info("username=" + username);
 
-        User theUser = userService.findByUsername(userName);
+        UserService userService = context.getBean(UserService.class, "userService");
 
-        // now place in the session
+        User user = userService.findByUsername(username);
+
+        // place user in the session
         HttpSession session = request.getSession();
-        session.setAttribute("user", theUser);
+        session.setAttribute("user", user);
 
         // forward to home page
-
         response.sendRedirect(request.getContextPath() + "/");
     }
-
 }
