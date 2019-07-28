@@ -1,9 +1,17 @@
 package pl.insert.dto;
 
-public class UserDto {
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
+public class UserDto implements Serializable {
+
+    @NotBlank(message = "is required", groups = Group1.class)
     private String username;
+
+    @NotBlank(message = "is required", groups = Group2.class)
     private String password;
+
+    @NotBlank(message = "is required", groups = Group2.class)
     private String matchingPassword;
 
     public String getUsername() {
@@ -37,5 +45,11 @@ public class UserDto {
                 ", password='" + password + '\'' +
                 ", matchingPassword='" + matchingPassword + '\'' +
                 '}';
+    }
+
+    interface Group1 {
+    }
+
+    interface Group2 {
     }
 }

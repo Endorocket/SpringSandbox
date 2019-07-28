@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head ('Register - Confirm')"></head>
+<body>
+
+<div class="wrapper">
+
+    <div class="navbar navbar-dark bg-dark navbar-expand-md" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+
+            <h3 style="margin: 40px">Employee Details</h3>
+
+            <div class="form-group">
+                <h6 th:text="Username+': '+ ${userDto.username}"></h6>
+
+                <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_username'}">Username</a>
+            </div>
+
+            <div class="form-group">
+                <a class="btn btn-secondary" th:href="@{${flowExecutionUrl} + '&_eventId_password'}">Password</a>
+            </div>
+
+            <div style="margin: 40px">
+                <a class="btn btn-success" th:href="@{${flowExecutionUrl} + '&_eventId_submit'}">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
+</body>
+</html>

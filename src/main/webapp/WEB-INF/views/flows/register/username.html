@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head ('Register - Username')"></head>
+<body>
+
+<div class="wrapper">
+
+    <div class="navbar navbar-dark bg-dark navbar-expand-md" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <h3 style="margin: 50px">Register</h3>
+
+            <form method="post" th:object="${userDto}">
+
+                <input type="text" th:field="*{username}"
+                       class="form-control mb-4 col-4" placeholder="Username">
+
+                <p class="alert alert-danger col-3"
+                   th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('username')}"
+                   th:text="${err.text}">Input is invalid</p>
+
+                <button type="submit" class="btn btn-info col-2" name="_eventId_next">Next</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
+</body>
+</html>
