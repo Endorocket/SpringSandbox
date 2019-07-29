@@ -1,8 +1,11 @@
 package pl.insert.dto;
 
+import pl.insert.validation.FieldMatch;
+
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
+@FieldMatch(first = "password", second = "matchingPassword", message = "The password fields must match", groups = UserDto.Group2.class)
 public class UserDto implements Serializable {
 
     @NotBlank(message = "is required", groups = Group1.class)
