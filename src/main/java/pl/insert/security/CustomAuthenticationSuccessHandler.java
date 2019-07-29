@@ -21,11 +21,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
-    private final ApplicationContext context;
+    private final UserService userService;
 
     @Autowired
-    public CustomAuthenticationSuccessHandler(ApplicationContext context) {
-        this.context = context;
+    public CustomAuthenticationSuccessHandler(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -37,8 +37,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String username = authentication.getName();
 
         logger.info("username=" + username);
-
-        UserService userService = context.getBean(UserService.class, "userService");
 
         User user = userService.findByUsername(username);
 

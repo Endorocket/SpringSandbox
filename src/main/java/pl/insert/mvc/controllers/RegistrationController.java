@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,9 +40,8 @@ public class RegistrationController {
 
     @PostMapping("/processRegistrationForm")
     public String processRegistrationForm(
-            @Valid @ModelAttribute("userDto") UserDto userDto,
-            BindingResult theBindingResult,
-            Model theModel) {
+            @Validated({UserDto.Group1.class, UserDto.Group2.class}) @ModelAttribute("userDto") UserDto userDto,
+            BindingResult theBindingResult, Model model) {
 
         String userName = userDto.getUsername();
         logger.info("Processing registration form for: " + userName);
@@ -54,8 +54,8 @@ public class RegistrationController {
         // check the database if user already exists
         User existing = userService.findByUsername(userName);
         if (existing != null) {
-            theModel.addAttribute("userDto", new UserDto());
-            theModel.addAttribute("registrationError", "User name already exists.");
+            model.addAttribute("userDto", new UserDto());
+            model.addAttribute("registrationError", "User name already exists.");
 
             logger.warn("User name already exists.");
             return "registration/register-form";

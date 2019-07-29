@@ -1,6 +1,7 @@
 package pl.insert.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
@@ -10,12 +11,12 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{SecurityConfig.class};
+        return new Class[]{JpaConfig.class, SecurityConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{JpaConfig.class, WebMvcConfig.class, WebFlowConfig.class};
+        return new Class[]{WebMvcConfig.class, WebFlowConfig.class};
     }
 
     @Override
@@ -32,6 +33,9 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
         characterEncodingFilter.setForceEncoding(true);
 
         servletContext.addFilter("characterEncoding", characterEncodingFilter)
+                .addMappingForUrlPatterns(null, false, "/*");
+
+        servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class)
                 .addMappingForUrlPatterns(null, false, "/*");
     }
 }

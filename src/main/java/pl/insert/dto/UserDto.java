@@ -50,9 +50,9 @@ public class UserDto implements Serializable {
                 '}';
     }
 
-    interface Group1 {
+    public interface Group1 {
     }
 
-    interface Group2 {
+    public interface Group2 {
     }
 }

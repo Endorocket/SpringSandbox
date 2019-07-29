@@ -1,5 +1,9 @@
 package pl.insert.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +24,9 @@ import java.util.stream.Collectors;
 
 @Service("userService")
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, InitializingBean, DisposableBean {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     private final UserDao userDao;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -64,5 +70,15 @@ public class UserServiceImpl implements UserService {
         return authorities.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        logger.info("initializing userService bean");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        logger.info("destroying userService bean");
     }
 }

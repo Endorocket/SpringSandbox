@@ -7,7 +7,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Repository;
 import pl.insert.data.Employee;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
