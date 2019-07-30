@@ -13,20 +13,22 @@ CREATE TABLE `users` (
 --
 -- Default passwords here are: fun123
 --
-INSERT INTO `users` 
-VALUES 
+INSERT INTO `users`
+VALUES
 ('user','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1),
 ('admin','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1);
 
 CREATE TABLE `authorities` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `authority` varchar(50) NOT NULL,
+  PRIMARY KEY (id),
   UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
   CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `authorities` 
-VALUES 
+INSERT INTO `authorities` (username, authority)
+VALUES
 ('user','ROLE_USER'),
 ('admin','ROLE_USER'),
 ('admin','ROLE_ADMIN');

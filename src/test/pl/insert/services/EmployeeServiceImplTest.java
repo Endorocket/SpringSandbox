@@ -35,6 +35,13 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    public void getEmployeeById_shouldThrowException() {
+        Employee employee = employeeService.getEmployeeById(0L);
+
+        System.out.println(employee);
+    }
+
+    @Test
     public void insertEmployee() {
         Employee employee = new Employee();
         employee.setDepartment("Government");

@@ -8,11 +8,14 @@ import java.io.Serializable;
 public class Authority implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "username", nullable = false)
     private User user;
 
-    @Id
     @Column(name = "authority")
     private String authority;
 
@@ -22,6 +25,10 @@ public class Authority implements Serializable {
     public Authority(User user, String authority) {
         this.user = user;
         this.authority = authority;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public User getUser() {
