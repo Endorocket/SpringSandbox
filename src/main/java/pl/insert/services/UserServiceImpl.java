@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("userService")
+@Service
 @Transactional
 public class UserServiceImpl implements UserService, InitializingBean, DisposableBean {
 

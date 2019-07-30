@@ -3,16 +3,15 @@ package pl.insert.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.insert.dao.EmployeeDao;
 import pl.insert.data.Employee;
 
-
 import java.util.List;
 
 @Service(value = "employeeService")
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
@@ -25,14 +24,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public List<Employee> getEmployeeList() {
         List<Employee> employees = employeeDao.getEmployeeList();
         return employees;
     }
 
     @Override
-    @Transactional
     public Employee getEmployeeById(Long empId) {
         return employeeDao.getEmployeeById(empId);
     }
@@ -45,13 +42,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public void deleteEmployee(Long empId) {
         employeeDao.deleteEmployee(empId);
     }
 
     @Override
-    @Transactional
     public Employee updateEmployee(Employee emp) {
         Employee employee = employeeDao.updateEmployee(emp);
         return employee;
