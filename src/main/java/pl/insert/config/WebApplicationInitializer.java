@@ -11,7 +11,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{JpaConfig.class, SecurityConfig.class};
+        return new Class[]{JpaConfig.class, SecurityConfig.class, MethodSecurityConfig.class};
     }
 
     @Override
