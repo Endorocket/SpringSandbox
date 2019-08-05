@@ -19,6 +19,8 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
+    public final static String IP_ADDRESS = "127.0.0.1/8";
+
     private final Logger log = LoggerFactory.getLogger(this.getClass().getName());
     private final EmployeeService employeeService;
 
@@ -37,6 +39,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasIpAddress(T(pl.insert.mvc.controllers.EmployeeController).IP_ADDRESS)")
     public String showFormForAdd(Model model) {
         Employee employee = new Employee();
         employee.setJoinedOn(new Date());
@@ -80,7 +83,6 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete")
-    @PreAuthorize("hasIpAddress('0:0:0:0:0:0:0:1')")
     public String deleteEmployee(@RequestParam("employeeId") long employeeId) {
         log.info("inside deleteEmployee");
         employeeService.deleteEmployee(employeeId);

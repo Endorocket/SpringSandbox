@@ -35,7 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public void insertEmployee(Employee emp) {
         emp.setEmpId(null);
         employeeDao.insertEmployee(emp);
