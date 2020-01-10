@@ -10,31 +10,31 @@ import java.util.Date;
 @Component
 public class AddEmployeeHandler {
 
-    private final EmployeeService employeeService;
+  private final EmployeeService employeeService;
 
-    @Autowired
-    public AddEmployeeHandler(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
+  @Autowired
+  public AddEmployeeHandler(EmployeeService employeeService) {
+    this.employeeService = employeeService;
+  }
 
-    public Employee init() {
-        return new Employee();
-    }
+  public Employee init() {
+    return new Employee();
+  }
 
-    public String enterJoinedOn(Employee model) {
-        String transitionValue = "confirm";
+  public String enterJoinedOn(Employee model) {
+    String transitionValue = "confirm";
 
 //        Date date = new Date();
 //        model.setJoinedOn(date);
 
-        return transitionValue;
-    }
+    return transitionValue;
+  }
 
-    public String save(Employee model) {
-        String transitionValue = "success";
+  public String save(Employee model) {
+    String transitionValue = "success";
 
-        employeeService.insertEmployee(model);
+    employeeService.insertEmployee(model);
 
-        return transitionValue;
-    }
+    return transitionValue;
+  }
 }

@@ -24,6 +24,27 @@
                    th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('username')}"
                    th:text="${err.text}">Input is invalid</p>
 
+                <p th:text="${userDto.strings}"></p>
+
+                Strings:
+                <div th:each="string,stat : *{strings}">
+                    <div>
+                        <input type="text" th:field="*{strings[__${stat.index}__]}" class="form-control mb-4 col-4"/>
+                    </div>
+                </div>
+
+                Surveys:
+                <div th:each="survey,stat : *{surveys}">
+                    <div>
+                        <input type="text" th:field="*{surveys[__${stat.index}__].computers}"
+                               class="form-control mb-4 col-4"/>
+
+                        <input type="text" th:field="*{surveys[__${stat.index}__].companyName}"
+                               class="form-control mb-4 col-4"/>
+                </div>
+                </div>
+                <br>
+
                 <button type="submit" class="btn btn-info col-2" name="_eventId_next">Next</button>
             </form>
 
