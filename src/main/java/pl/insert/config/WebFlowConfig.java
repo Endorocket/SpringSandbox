@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.webflow.config.AbstractFlowConfiguration;
@@ -14,7 +13,7 @@ import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.mvc.builder.MvcViewFactoryCreator;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
-import pl.insert.converters.CustomConversionService;
+import pl.insert.webflow.config.EnhancedMvcViewFactoryCreator;
 
 import java.util.Collections;
 
@@ -48,13 +47,12 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
                 .setViewFactoryCreator(mvcViewFactoryCreator())
                 .setDevelopmentMode(true)
                 .setValidator(validator())
-                .setConversionService(conversionService())
                 .build();
     }
 
     @Bean
     public MvcViewFactoryCreator mvcViewFactoryCreator() {
-        MvcViewFactoryCreator factoryCreator = new MvcViewFactoryCreator();
+        EnhancedMvcViewFactoryCreator factoryCreator = new EnhancedMvcViewFactoryCreator();
         factoryCreator.setViewResolvers(Collections.singletonList(viewResolver));
         factoryCreator.setUseSpringBeanBinding(true);
         return factoryCreator;
@@ -79,10 +77,5 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     @Bean
     public LocalValidatorFactoryBean validator() {
         return new LocalValidatorFactoryBean();
-    }
-
-    @Bean
-    public CustomConversionService conversionService() {
-        return new CustomConversionService();
     }
 }

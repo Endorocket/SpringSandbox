@@ -11,8 +11,9 @@
   <view-state id="username" view="flows/register/username" model="flowScope.userDto" validation-hints="'group1'">
     <binder>
       <binding property="username"/>
-      <binding property="strings"/>
-      <binding property="surveys"/>
+      <binding property="strings[*]"/>
+      <binding property="surveys[*].computers"/>
+      <binding property="surveys[*].companyName"/>
     </binder>
     <transition on="next" to="validateUsername"/>
   </view-state>
