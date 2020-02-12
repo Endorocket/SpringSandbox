@@ -26,7 +26,7 @@ import java.util.Set;
  * https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/util/AntPathMatcher.html
  *
  * e.g.
- * <binding property="optionalModules[*].durationId"/>
+ * <binding property="surveys[*].computers"/>
  *
  */
 public class EnhancedServletMvcView extends ServletMvcView {
